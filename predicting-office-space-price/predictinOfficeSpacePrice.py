@@ -1,5 +1,8 @@
 import numpy as np
 from sklearn import linear_model
+from sklearn.linear_model import Ridge
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
 
 FN = raw_input()
 x = FN.split()
@@ -24,7 +27,9 @@ for _ in range(0, T):
     
 #print("Training..")
 ## Train the regressor
-model = linear_model.LinearRegression()
+#model = linear_model.LinearRegression()
+degree = 3
+model = make_pipeline(PolynomialFeatures(degree), Ridge())
 model.fit(np.array(train_X), np.array(train_Y))
 
 #print("Prediction..")
