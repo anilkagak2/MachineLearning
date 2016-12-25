@@ -27,10 +27,13 @@ for i in range(25):
         #print(char)
         #plt.imshow(template)
         #plt.show()
+        '''
         if char in imgTemplates:
             imgTemplates[char].append(template)
         else:
             imgTemplates[char] = [template]
+        '''
+        imgTemplates[char] = template
         j += 9
 
 
@@ -39,7 +42,12 @@ U = pickle.dumps(imgTemplates)
 #U = str(imgTemplates)
 print(len(U))
 
-with open("model.txt", "w") as fp:
+import base64
+Ubase64 = base64.b64encode(U)
+with open("modelbase64.txt", "wb") as fp:
+    fp.write(U)
+
+with open("model.txt", "wb") as fp:
     fp.write(U)
 
 #from ast import literal_eval
@@ -72,11 +80,11 @@ for i in range(5):
     minDistance = 1000000
     matchedChar = "A"
     for char in imgTemplates:
-        for charTemplate in imgTemplates[char]:
-            dist = np.linalg.norm(template - charTemplate)
-            if dist < minDistance:
-                matchedChar = char
-                minDistance = dist
+        charTemplate = imgTemplates[char]
+        dist = np.linalg.norm(template - charTemplate)
+        if dist < minDistance:
+            matchedChar = char
+            minDistance = dist
 
     result += matchedChar
 
