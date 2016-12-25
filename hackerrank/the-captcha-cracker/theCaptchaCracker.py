@@ -33,7 +33,7 @@ for i in range(25):
         else:
             imgTemplates[char] = [template]
         '''
-        imgTemplates[char] = template
+        imgTemplates[char] = template[:,:,0]
         j += 9
 
 
@@ -45,7 +45,7 @@ print(len(U))
 import base64
 Ubase64 = base64.b64encode(U)
 with open("modelbase64.txt", "wb") as fp:
-    fp.write(U)
+    fp.write(Ubase64)
 
 with open("model.txt", "wb") as fp:
     fp.write(U)
@@ -75,6 +75,8 @@ result = ""
 j = 0
 for i in range(5):
     template = x[:, j:j+9, :]
+    template = template[:,:,0]
+    print(template.shape)
     j += 9
     
     minDistance = 1000000
