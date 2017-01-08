@@ -5,14 +5,12 @@ from matplotlib import pyplot as plt
 import sys
 import os
 import pickle
-import sklearn 
 from sklearn.datasets import fetch_mldata
-from sklearn import metrics, svm, cross_validation, datasets
 from scipy.misc import imresize
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.neural_network import BernoulliRBM
 from sklearn.pipeline import Pipeline
-from sklearn import datasets, neighbors, linear_model
+from sklearn import datasets, neighbors, linear_model, metrics, svm, cross_validation
 
 def brightenTestImage(x):
 	plt.imshow(x, cmap='gray')
